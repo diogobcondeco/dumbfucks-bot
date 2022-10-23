@@ -5,10 +5,14 @@ from dotenv import load_dotenv
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
 
-client = discord.Client(intents=discord.Intents.default())
+intents = discord.Intents().default()
+
+client = discord.Client(intents=intents)
 
 greetings = ["hello", "hi", "hey"]
 channel_ids = {"welcome": 963791333707894925}
+
+# Client Events
 
 
 @client.event
@@ -42,9 +46,13 @@ async def on_member_join(member):
     await client.add_roles(member, role)
 
 
+@client.event
 async def on_member_leave(member):
     print(member.name, "just left!")
     channel = client.get_channel(channel_ids["welcome"])
     await channel.send(f"Goodbye {member.name}, it was fun while it lasted")
 
+# Bot Events
+
+# start the bot
 client.run(TOKEN)
