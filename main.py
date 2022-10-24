@@ -23,9 +23,11 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    print(f"{message.author}, just send the message: {message.content}")
     if message.author == client.user:
         return
+
+    if message.guild == None:
+        print(f"{message.author}, just send the message: {message.content}")
 
     if message.author.id == 379048417353269249:
         for i in range(10):
